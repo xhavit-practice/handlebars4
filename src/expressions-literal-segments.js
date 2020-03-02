@@ -18,16 +18,14 @@ console.log(
 
 // true, false, null and undefined
 console.log(
-    Handlebars.compile(
-        `
+    Handlebars.compile(`
         <ul>
             <li> {{[true]}} </li>
             <li> {{[false].foo}} </li>
             <li> {{[null]}} </li>
             <li> {{[undefined]}} </li>
             <li> {{foo.[false]}} </li>
-        </ul>`
-    )({
+        </ul>`)({
         true: 'true',
         false: {
             foo: 'false.foo',
@@ -43,8 +41,7 @@ console.log(
 // especial identifiers
 // use 'triple-stash' to avoid html-escaping
 console.log(
-    Handlebars.compile(
-        `
+    Handlebars.compile(`
         <ul>
             <li> {{{[ ]}}} </li>
             <li> {{{[!]}}} </li>
@@ -73,8 +70,7 @@ console.log(
             <li> {{{[|]}}} </li>
             <li> {{{[}]}}} </li>
             <li> {{{[~]}}} </li>
-        </ul>`
-    )({
+        </ul>`)({
         ' ': 'whitespace',
         '!': '!',
         '"': '"',

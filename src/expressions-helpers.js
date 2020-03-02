@@ -23,10 +23,10 @@ Handlebars.registerHelper('badbold', function(text) {
 });
 console.log(
     Handlebars.compile(`
-    <div>
-        right: {{bold foo}}
-        wrong: {{badbold foo}}
-    </div>`)({
+        <div>
+            right: {{bold foo}}
+            wrong: {{badbold foo}}
+        </div>`)({
         foo: 'foo',
     })
 );
@@ -43,10 +43,10 @@ Handlebars.registerHelper('link', function(text, url) {
 });
 console.log(
     Handlebars.compile(`
-    <div>
-        {{link text url}}
-        {{link 'text with whitespace' url}}
-    </div>`)({
+        <div>
+            {{link text url}}
+            {{link 'text with whitespace' url}}
+        </div>`)({
         firstname: 'Yehuda',
         lastname: 'Katz',
         url: 'https://yehudakatz.com/',
@@ -59,9 +59,9 @@ console.log(
 console.log('\n---- Literal arguments ----');
 Handlebars.registerHelper('progress', function(status, percent, success) {
     return `
-    status type: ${typeof status}
-    percent type: ${typeof percent}
-    success type: ${typeof success}`;
+        status type: ${typeof status}
+        percent type: ${typeof percent}
+        success type: ${typeof success}`;
 });
 console.log(
     Handlebars.compile(`
@@ -93,4 +93,18 @@ console.log(
             url: 'https://yehudakatz.com/',
         },
     })
+);
+
+// Disambiguating helpers calls and property lookup
+// helper has priority over the input property
+console.log('\n---- Disambiguating helpers calls and property lookup ----');
+Handlebars.registerHelper('name', function() {
+    return 'foo';
+});
+console.log(
+    Handlebars.compile(`
+        <div>{{name}}</div>
+        <div>{{./name}}</div>
+        <div>{{this.name}}</div>
+    `)({ name: 'bar' })
 );
